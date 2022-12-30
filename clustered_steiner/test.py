@@ -54,9 +54,10 @@ best_dis = 100000
 init_sf = utils.calculate_skill_factor(rank)
 population = init_code
 
-for i in range(10):
-    random.seed(1)
-    np.random.seed(1)
-    new_population = CrossOver.crossover(init_code,init_sf)
-    print(len(new_population))
-    print(len(init_sf))
+print(int((0.99-0.2)/0.08))
+# for i in range(10):
+#     random.seed(1)
+#     np.random.seed(1)
+#     new_population = CrossOver.crossover(init_code,init_sf)
+#     print(len(new_population))
+#     print(len(init_sf))

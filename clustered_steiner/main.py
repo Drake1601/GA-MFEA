@@ -40,6 +40,7 @@ vertexs.append(vertexs2)
 rand = random.Random(1)
 np.random.seed(1)
 
+
 # population = init_population(
 #     vertexs=vertexs1,
 #     clusters=clusters1,

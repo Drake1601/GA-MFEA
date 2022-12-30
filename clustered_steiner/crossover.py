@@ -62,12 +62,22 @@ class CrossOver():
         return indi
 
     @classmethod
+    def crossover_swap(cls,pa1,pa2):
+        index1 = random.randint(0,len(pa1)-20)
+        index2 = random.randint(index1,len(pa1)-1)
+        child1 = pa1[0:index1]+pa2[index1:index2]+pa1[index2:]
+        child2 = pa2[0:index1]+pa1[index1:index2]+pa2[index2:]
+
+        return child1,child2
+
+    @classmethod
     def crossover_sbx(cls,parent1,parent2):
         u = random.random()
+        t = random.randint(2,11)
         if u <= 0.5:
-            beta = (2*u)**(1/6)
+            beta = (2*u)**(1/t)
         else:
-            beta = (1/(2*(1-u)))**(1/6)
+            beta = (1/(2*(1-u)))**(1/t)
 
         child1 = []
         child2 = []
@@ -112,7 +122,7 @@ class CrossOver():
             s2 = utils.get_skill_factor(init_sf, population[i + 1])
 
             if r < 0.3 or s1 == s2:
-                c1, c2 = CrossOver.crossover_sbx(population[i], population[i + 1])
+                c1, c2 = CrossOver.crossover_swap(population[i], population[i + 1])
                 new_population.append(c1)
                 new_population.append(c2)
                 u = random.random()
@@ -167,6 +177,18 @@ class CrossOver():
             best_population.append(fitness[1][i][0])
             best_init_sf.append((fitness[0][i][0], 1))
             best_init_sf.append((fitness[1][i][0], 2))
+
+        # tmp1 = fitness[0][30:]
+        # tmp2 = fitness[1][30:]
+        # random.shuffle(tmp1)
+        # random.shuffle(tmp2)
+        # for i in range(20):
+        #   best_population.append(tmp1[i][0])
+        #   best_population.append(tmp2[i][0])
+        #   best_init_sf.append((tmp1[i][0], 1))
+        #   best_init_sf.append((tmp2[i][0], 2))
+        # random.shuffle(best_population)
+        # random.shuffle(best_init_sf)
 
         # random.shuffle(best_population)
         # random.shuffle(best_init_sf)
