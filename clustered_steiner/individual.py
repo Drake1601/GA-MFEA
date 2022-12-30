@@ -1,7 +1,8 @@
 
 class individual():
-    def __init__(self, steiner_vertexs, cluster_index):
+    def __init__(self, steiner_vertexs,gene, cluster_index):
         self.steiner_vertexs = steiner_vertexs
+        self.gene = gene
         self.cluster_index = cluster_index
         #self.skill_factor = skill_factor
 

@@ -73,7 +73,7 @@ def calculate_fitness(individual, clusters, graph):
     represent_local_vertexs = [-1]*len(clusters)
 
 
-    for index, is_select in enumerate(individual.cluster_index):
+    for index, is_select in enumerate(individual.gene):
         if is_select == 0 or cluster_indexs[index] == -1:
             continue
         cluster_index = cluster_indexs[index]
@@ -155,8 +155,14 @@ def decode(encode,numCluster,steiner_vertexs):
         if decode[i] == 10:
             print(encode[i])
 
+    for i in range(len(decode)):
+        if decode[i] > -1:
+            gene.append(1)
+        else:
+            gene.append(0)
 
-    indi = individual(steiner_vertexs = steiner_vertexs,cluster_index = decode)
+
+    indi = individual(steiner_vertexs = steiner_vertexs,gene = gene,cluster_index = decode)
 
     return indi
 

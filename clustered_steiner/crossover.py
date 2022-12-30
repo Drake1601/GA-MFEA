@@ -92,6 +92,20 @@ class CrossOver():
         return child1,child2
 
     @classmethod
+    def mutate_swap(cls,indi_code):
+        new_code = indi_code
+        leng = len(indi_code)
+        index1 = random.randint(0, leng - 10)
+        index2 = random.randint(index1, leng - 1)
+        rangee = int((index2-index1)/2)
+        for i in range(rangee):
+            tmp = new_code[index1+i]
+            new_code[index1+i] = new_code[index2-i]
+            new_code[index2-i] = tmp
+
+        return new_code
+
+    @classmethod
     def mutate(cls,indi_encode):
         tmp = []
         leng = len(indi_encode)
