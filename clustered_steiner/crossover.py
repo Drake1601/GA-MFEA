@@ -63,11 +63,11 @@ class CrossOver():
 
     @classmethod
     def crossover_swap(cls,pa1,pa2):
-        index1 = random.randint(0,len(pa1)-20)
-        index2 = random.randint(index1,len(pa1)-1)
+        index1 = random.randint(0,len(pa1[0])-20)
+        index2 = random.randint(index1,len(pa1[0])-1)
+
         child1 = pa1[0:index1]+pa2[index1:index2]+pa1[index2:]
         child2 = pa2[0:index1]+pa1[index1:index2]+pa2[index2:]
-
         return child1,child2
 
     @classmethod
@@ -79,17 +79,17 @@ class CrossOver():
         else:
             beta = (1/(2*(1-u)))**(1/t)
 
-        child1 = []
-        child2 = []
-        for i in range(len(parent1)):
-            c1 = 0.5*((1+beta)*parent1[i]+(1-beta)*parent2[i])
-            c2 = 0.5*((1-beta)*parent1[i]+(1+beta)*parent2[i])
+        child1_clus = []
+        child2_clus = []
+        for i in range(len(parent1[0])):
+            c1 = 0.5*((1+beta)*parent1[0][i]+(1-beta)*parent2[0][i])
+            c2 = 0.5*((1-beta)*parent1[0][i]+(1+beta)*parent2[0][i])
+
+            child1_clus.append(abs(c1) if abs(c1)<1 else 1.0/abs(c1))
+            child2_clus.append(abs(c2) if abs(c2)<1 else 1.0/abs(c2))
 
 
-            child1.append(abs(c1) if abs(c1)<1 else 1.0/abs(c1))
-            child2.append(abs(c2) if abs(c2)<1 else 1.0/abs(c2))
-
-        return child1,child2
+        return child1_clus,child2_clus
 
     @classmethod
     def mutate_swap(cls,indi_code):
@@ -107,19 +107,16 @@ class CrossOver():
 
     @classmethod
     def mutate(cls,indi_encode):
-        tmp = []
-        leng = len(indi_encode)
-        index1 = random.randint(0,leng-10)
+        tmp = indi_encode
+        leng = len(indi_encode[0])
+        index1 = random.randint(0,leng-20)
         index2 = random.randint(index1,leng-1)
-        for i in range(leng):
-            if indi_encode[i] > 1:
-                print('error > 1')
-            if indi_encode[i] < 0:
-                print('error < 0')
-            tmp.append(1-indi_encode[i])
+        for i in range(index1,index2):
+            tmp[0][i] = 1 - indi_encode[0][i]
+            tmp[1][i] = 1 - indi_encode[1][i]
 
-        new_encode = indi_encode[:index1]+tmp[index1:index2]+indi_encode[index2:]
-        return  new_encode
+        # new_encode = indi_encode[:index1]+tmp[index1:index2]+indi_encode[index2:]
+        return  tmp
 
     # @classmethod
     # def crossover_mfea(cls,pa1,pa2):
