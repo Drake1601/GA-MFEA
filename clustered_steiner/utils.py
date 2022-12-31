@@ -149,17 +149,12 @@ def update_fitness(population, clusters, graph):
 
 def decode(encode,numCluster,steiner_vertexs):
     decode = []
-    gene = []
     for i in range(len(steiner_vertexs)):
-        decode.append(int(encode[i]*(numCluster+1))-1)
+        decode.append(int(encode[0][i]*(numCluster+1))-1)
         if decode[i] == 10:
             print(encode[i])
 
-    for i in range(len(decode)):
-        if decode[i] > -1:
-            gene.append(1)
-        else:
-            gene.append(0)
+    gene = encode[1][0:len(steiner_vertexs)]
 
 
     indi = individual(steiner_vertexs = steiner_vertexs,gene = gene,cluster_index = decode)

@@ -27,7 +27,11 @@ def init_tree_from_vertexs_set(vertexs, graph):
 
 #init encode for MFEA
 def init_encode(length):
-    encode = [random.random() for i in range(length)]
+    cluster_encode = [random.random() for i in range(length)]
+    gene = [random.randint(0,1) for i in range(length)]
+    encode = []
+    encode.append(cluster_encode)
+    encode.append(gene)
     return encode
 
 
